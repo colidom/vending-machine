@@ -5,6 +5,22 @@ import filecmp
 from pathlib import Path
 
 
+def order(product_code: str, qty: int, money_inserted: int):
+    return
+
+
+def restock_product(product_code: str, qty_restocked: int):
+    return
+
+
+def change_product_price(product_code: str, new_price: int):
+    return
+
+
+def restock_money(money_amount: int):
+    return
+
+
 def operations(input_path: Path) -> list:
     with open(input_path, "r") as f:
         data = [line.strip() for line in f]
