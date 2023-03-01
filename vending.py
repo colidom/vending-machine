@@ -4,6 +4,10 @@
 import filecmp
 from pathlib import Path
 
+E1 = "PRODUCT NOT FOUND"
+E2 = "UNAVAILABLE STOCK"
+E3 = "NOT ENOUGH USER MONEY"
+
 
 def order(product_code: str, qty: int, money_inserted: int):
     return
