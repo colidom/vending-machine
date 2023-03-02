@@ -8,6 +8,8 @@ E1 = "PRODUCT NOT FOUND"
 E2 = "UNAVAILABLE STOCK"
 E3 = "NOT ENOUGH USER MONEY"
 
+mock_roberto = [["D12", 7, 21], ["D12", 7, 22]]
+
 
 def order(product_code: str, qty: int, money_inserted: int):
     return
@@ -25,10 +27,10 @@ def restock_money(money_amount: int):
     return
 
 
-def operations(input_path: Path) -> list:
+def read_operations(input_path: Path) -> list:
     with open(input_path, "r") as f:
         data = [line.strip() for line in f]
-        return data
+        print(data)
 
 
 def status_machine(output_path: Path) -> str:
@@ -45,5 +47,6 @@ def run(operations_path: Path) -> bool:
 
 
 if __name__ == "__main__":
-    operations("data/vending/operations.dat")
+    # operations("data/vending/operations.dat")
     status_machine("data/vending/status.dat")
+    order(mock_roberto)
