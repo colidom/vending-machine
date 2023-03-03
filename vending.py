@@ -8,8 +8,6 @@ E1 = "PRODUCT NOT FOUND"
 E2 = "UNAVAILABLE STOCK"
 E3 = "NOT ENOUGH USER MONEY"
 
-mock_roberto = [["D12", 7, 21], ["D12", 7, 22]]
-
 
 def order(operation: list, products: dict) -> tuple:
     return
@@ -49,4 +47,3 @@ def run(operations_path: Path) -> bool:
 if __name__ == "__main__":
     read_operations("data/vending/operations.dat")
     status_machine("data/vending/status.dat")
-    # order(mock_roberto)
