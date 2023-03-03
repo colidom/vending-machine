@@ -11,7 +11,7 @@ E3 = "NOT ENOUGH USER MONEY"
 mock_roberto = [["D12", 7, 21], ["D12", 7, 22]]
 
 
-def order(product_code: str, qty: int, money_inserted: int):
+def order(operation: list, products: dict) -> tuple:
     return
 
 
