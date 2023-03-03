@@ -29,8 +29,13 @@ def restock_money(money_amount: int):
 
 def read_operations(input_path: Path) -> list:
     with open(input_path, "r") as f:
-        data = [line.strip() for line in f]
-        print(data)
+        data = [line.strip().split() for line in f]
+        result = {}
+
+        for operation in data:
+            print(data)
+
+        return result
 
 
 def status_machine(output_path: Path) -> str:
@@ -47,6 +52,6 @@ def run(operations_path: Path) -> bool:
 
 
 if __name__ == "__main__":
-    # operations("data/vending/operations.dat")
+    print(read_operations("data/vending/operations.dat"))
     status_machine("data/vending/status.dat")
-    order(mock_roberto)
+    # order(mock_roberto)
