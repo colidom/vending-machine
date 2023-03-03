@@ -53,4 +53,3 @@ def run(operations_path: Path) -> bool:
 
 if __name__ == "__main__":
     read_operations("data/vending/operations.dat")
-    status_machine("data/vending/status.dat")
