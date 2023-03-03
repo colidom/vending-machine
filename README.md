@@ -1,104 +1,78 @@
-# vending-machine
-
-Proyecto de Máquina de vending en Python
-
 # UT4-TE1: Funciones
 
 ### TAREA EVALUABLE
 
-![Vending machine](./img/vending.svg)
+![Vending machine](./images/vending-machine.svg)
 
 ## Objetivo
 
-Escriba un programa en Python que permita gestionar una **MÁQUINA DE VENDING**.
+Escriba un programa en Python que permita simular el comportamiento de una **MÁQUINA DE VENDING**.
 
 ## Datos de entrada
 
-### Información inicial de la máquina
-
-`vending.dat`
-
-En la primera línea habrán 3 valores separados por espacios:
-
--   El primer valor corresponde al número de monedas de 2€.
--   El segundo valor corresponde al número de monedas de 1€.
--   El tercer valor corresponde al número de monedas de 50 céntimos (0.5€)
-
-A partir de ahí, aparecen un número intederminado de líneas donde hay tres campos separados espacios:
-
--   Código del producto (D para "drinks" y F para "food").
--   Stock en máquina del producto.
--   Precio unitario del producto (en euros).
-
-```
-100 50 120
-D31 20 0.50
-D12 40 1
-F19 33 1.50
-F10 24 2
-```
-
-### Operaciones sobre la máquina
-
 `operations.dat`
 
-Existen 3 tipos de operaciones sobre la máquina de vending:
+| Código | Descripción                                                    | Argumentos                                                                | Ejemplo      | Condiciones de error                                                                                                                                                  |
+| ------ | -------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `O`    | Hacer un pedido <br>(**O**rder)                                | - Código del producto.<br>- Cantidad solicitada.<br>- Dinero introducido. | `O F19 4 10` | - E1: El código del producto no existe.<br>- E2: No hay stock suficiente del producto solicitado.<br>- E3: El importe total introducido no cubre el total del pedido. |
+| `R`    | Reponer un producto\* <br>(**R**estock product)                | - Código del producto.<br>- Cantidad repuesta.                            | `R D12 7`    |
+| `P`    | Cambiar el precio de un producto<br>(change product **P**rice) | - Código del producto.<br>- Nuevo precio del producto.                    | `P F10 3`    | - E1: El código del producto no existe.                                                                                                                               |
+| `M`    | Reponer dinero <br>(restock **M**oney)                         | - Cantidad de dinero.                                                     | `M 20`       |
 
--   Pedido: se representa por el código `O` (Order). Tiene los siguientes argumentos separados por espacios:
-    -   Código del producto.
-    -   Cantidad solicitada.
-    -   Monedas de 2€ insertadas.
-    -   Monedas de 1€ insertadas.
-    -   Monedas de 0.5€ insertadas.
--   Reposición de producto: se representa por el código `R` (Restock). Tiene los siguientes argumentos separados por espacios:
-    -   Código del producto.
-    -   Cantidad repuesta.
--   Recarga de monedas: se reprenseta por el código `C` (reload Coins). Tiene los siguientes argumentos separados por espacios:
-    -   Tipo de moneda.
-    -   Cantidad de monedas.
--   Cambio de precio: se representa por el código `P` (change Price). Tiene los siguientes argumentos separados por espacios:
-    -   Código del producto.
-    -   Nuevo precio unitario del producto (en euros).
+\* Si el producto no existe, se debe añadir un nuevo producto con la cantidad indicada y precio 0€.
 
-```
-O F19 4 3 1 0
-R D12 7
-O D31 4 0 1 2
-P F10 2.5
-C 1 4
-```
+**Códigos de error:**
+
+| Código | Error                 |
+| ------ | --------------------- |
+| E1     | PRODUCT NOT FOUND     |
+| E2     | UNAVAILABLE STOCK     |
+| E3     | NOT ENOUGH USER MONEY |
 
 ## Datos de salida
 
 `status.dat`
 
-La salida deberá escribirse en un fichero `status.dat` con el mismo formato que el fichero `vending.dat` pero **con los productos ordenados por su código**.
+Este fichero contendrá la situación de la máquina de vending después de aplicar las operaciones ~~indicadas~~ correctas del fichero `operations.dat`. Es decir, este fichero deberá contener las monedas de la máquina y las características de cada producto existente.
 
-Este fichero contendrá la situación de la máquina de vending después de aplicar las operaciones indicadas. Es decir, deberá mostrar las monedas y el stock que queda:
+En la primera línea debe aparecer el saldo actual de la máquina y a partir de la segunda línea todos los productos **ordenados por su código** indicando cantidad en stock y precio unitario.
+
+Por ejemplo:
 
 ```
-103 55 122
+99
 D12 47 1
-D31 16 0.50
-F10 24 2.5
-F19 29 1.50
+D31 16 5
+F10 24 2
+F19 29 3
 ```
+
+#### OPCIONAL 👇
+
+A efectos de depuración, puede ayudar el hecho de **mostrar por pantalla** el resultado de cada operación de entrada indicando si se ha realizado con éxito o no.
+
+Por ejemplo:
+
+```
+✅ O F19 4 10
+✅ R D12 7
+❌ P F10 3 (E3: PRODUCT NOT FOUND)
+✅ M 20
+```
+
+> 💡 En el caso de que una operación de un error, se podría incluir el código del error (entre paréntesis).
 
 ## Condiciones de error
 
-Para cada operación hay que tener en cuenta que se puede producir alguna condición de error:
-
--   No existe el producto solicitado (también para reposición/cambio de precio).
--   No existe el tipo de moneda especificada en la recarga de monedas.
--   No hay stock suficiente para la cantidad solicitada de un producto.
--   El dinero introducido no es suficiente para pagar el total del pedido.
--   No queda cambio disponible.
--   Los precios de los productos tienen que ser manejables con monedas de 2€, 1€ y 0.5€.
+Para cada operación hay que tener en cuenta que se puede producir alguna condición de error tal y como se especifica en la tabla de operaciones.
 
 Si una operación produce un error, se cancelará dicha operación pero se seguirá tratando el resto de operaciones pendientes.
 
 ## Notas
 
--   Utilizar sólo herramientas de Python que se hayan visto hasta el momento en clase.
+-   Se puede asumir que todos los precios y cantidades serán valores enteros mayores o iguales que 0.
 -   Crear todas las funciones que se consideren necesarias.
--   Se puede asumir que todas las cantidades serán mayores o iguales que 0.
+-   Agregar anotaciones de tipos en las funciones.
+-   No es necesario añadir "docstrings" al código.
+-   Utilizar sólo herramientas de Python que se hayan visto hasta el momento en clase.
+-   No utilizar `input()` en el código final: trabajar únicamente con ficheros.
