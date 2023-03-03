@@ -43,10 +43,28 @@ def write_status(output_path: Path) -> str:
         f.write(f"{data}")
 
 
-# Principal
+# Función rincipal
 def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
-    # TU CÓDIGO AQUÍ
+
+    operations = []
+    for op in operations:
+        match op[0]:
+            case "O":
+                # Operación order
+                pass
+            case "R":
+                # Operación Restock
+                pass
+            case "P":
+                # Operación Precio
+                pass
+            case "M":
+                # Operación money
+                pass
+
+    # Finalmente escribimos en fichero de salida
+    write_status(status_path)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
