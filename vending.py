@@ -37,7 +37,7 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def status_machine(output_path: Path) -> str:
+def write_Status(output_path: Path) -> str:
     with open(output_path, "w") as f:
         data = "Hello World"
         f.write(f"{data}")
