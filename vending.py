@@ -29,13 +29,8 @@ def restock_money(money_amount: int):
 
 def read_operations(input_path: Path) -> list:
     with open(input_path, "r") as f:
-        data = [line.strip().split() for line in f]
-        result = {}
-
-        for operation in data:
-            print(data)
-
-        return result
+        operations = [line.strip().split() for line in f]
+        return operations
 
 
 def status_machine(output_path: Path) -> str:
