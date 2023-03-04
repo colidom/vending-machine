@@ -71,4 +71,4 @@ def run(operations_path: Path) -> bool:
 
 
 if __name__ == "__main__":
-    read_operations("data/vending/operations.dat")
+    print(run("data/vending/operations.dat"))
