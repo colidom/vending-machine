@@ -4,10 +4,6 @@
 import filecmp
 from pathlib import Path
 
-E1 = "PRODUCT NOT FOUND"
-E2 = "UNAVAILABLE STOCK"
-E3 = "NOT ENOUGH USER MONEY"
-
 
 # Hacer un pedido
 def order(operation: list, products: dict) -> tuple:
@@ -41,6 +37,20 @@ def write_status(output_path: Path) -> str:
     with open(output_path, "w") as f:
         data = "Hello World"
         f.write(f"{data}")
+
+
+def set_error(error: str) -> str:
+    match error:
+        case "E1":
+            error_desc = {"code": "E1", "desc": "PRODUCT NOT FOUND"}
+        case "E2":
+            error_desc = {"code": "E2", "desc": "UNAVAILABLE STOCK"}
+        case "E3":
+            error_desc = {"code": "E3", "desc": "NOT ENOUGH USER MONEY"}
+        case _:
+            error_desc = {"code": "E3", "desc": "UNKNOWN ERROR"}
+
+    return error_desc
 
 
 # Función rincipal
