@@ -48,7 +48,7 @@ def set_error(error: str) -> str:
         case "E3":
             error_desc = {"code": "E3", "desc": "NOT ENOUGH USER MONEY"}
         case _:
-            error_desc = {"code": "E3", "desc": "UNKNOWN ERROR"}
+            error_desc = {"code": "E0", "desc": "UNKNOWN ERROR"}
 
     return error_desc
 
