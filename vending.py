@@ -39,7 +39,7 @@ def write_status(output_path: Path) -> str:
         f.write(f"{data}")
 
 
-def set_error(error: str) -> str:
+def set_error(error: str) -> dict:
     match error:
         case "E1":
             error_desc = {"code": "E1", "desc": "PRODUCT NOT FOUND"}
