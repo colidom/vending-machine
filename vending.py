@@ -48,20 +48,21 @@ def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = []
+
     for op in operations:
         match op[0]:
             case "O":
                 # Operación order
-                pass
+                order()
             case "R":
                 # Operación Restock
-                pass
+                restock_product()
             case "P":
                 # Operación Precio
-                pass
+                change_product_price()
             case "M":
                 # Operación money
-                pass
+                restock_money()
 
     # Finalmente escribimos en fichero de salida
     write_status(status_path)
