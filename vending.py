@@ -33,9 +33,11 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def write_status(output_path: Path, balance: int) -> str:
+def write_status(output_path: Path, products_status: dict, balance: int) -> str:
     with open(output_path, "w") as f:
         f.write(f"{balance}")
+        for product_status in products_status:
+            pass
 
 
 def set_error(error: str) -> dict:
