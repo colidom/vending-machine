@@ -33,10 +33,9 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def write_status(output_path: Path) -> str:
+def write_status(output_path: Path, balance: int) -> str:
     with open(output_path, "w") as f:
-        data = "Hello World"
-        f.write(f"{data}")
+        f.write(f"{balance}")
 
 
 def set_error(error: str) -> dict:
