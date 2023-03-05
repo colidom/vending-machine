@@ -11,17 +11,17 @@ def order(operation: list, products: dict) -> tuple:
 
 
 # Reponer un producto
-def restock_product(product_code: str, qty_restocked: int):
+def restock_product(operation: list, qty_restocked: int):
     return
 
 
 # Cambiar el precio de un producto
-def change_product_price(product_code: str, new_price: int):
+def change_product_price(operation: list, new_price: int):
     return
 
 
 # Reponer dinero
-def restock_money(money_amount: int):
+def restock_money(operation: list, money_amount: int):
     return
 
 
