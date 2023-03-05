@@ -40,6 +40,7 @@ def write_status(output_path: Path, products_status: dict, balance: int) -> str:
             pass
 
 
+# Función auxiliar para informar errores
 def set_error(error: str) -> dict:
     match error:
         case "E1":
@@ -65,16 +66,12 @@ def run(operations_path: Path) -> bool:
     for operation in operations:
         match operation[0]:
             case "O":
-                # Operación order
                 order(operation, products_status, balance)
             case "R":
-                # Operación Restock
                 restock_product(operation, products_status)
             case "P":
-                # Operación Precio
                 change_product_price(operation, products_status)
             case "M":
-                # Operación money
                 restock_money(operation, balance)
 
     # Finalmente escribimos en fichero de salida
