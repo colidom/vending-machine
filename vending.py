@@ -58,24 +58,26 @@ def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = []
+    products_status = {}
+    balance = 0
 
-    for op in operations:
-        match op[0]:
+    for operation in operations:
+        match operation[0]:
             case "O":
                 # Operación order
-                order()
+                order(operation, products_status, balance)
             case "R":
                 # Operación Restock
-                restock_product()
+                restock_product(operation, products_status)
             case "P":
                 # Operación Precio
-                change_product_price()
+                change_product_price(operation, products_status)
             case "M":
                 # Operación money
-                restock_money()
+                restock_money(operation, balance)
 
     # Finalmente escribimos en fichero de salida
-    write_status(status_path)
+    write_status(status_path, products_status, balance)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
