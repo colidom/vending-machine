@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 # Hacer un pedido
-def order(operation: list, products: dict) -> tuple:
+def order(operation: list, products_status: dict) -> tuple:
     return
 
 
