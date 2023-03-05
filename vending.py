@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 # Hacer un pedido
-def order(operation: list, products_status: dict) -> tuple:
+def order(operation: list, products: dict) -> tuple:
     return
 
 
@@ -33,10 +33,10 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def write_status(output_path: Path, products_status: dict, balance: int) -> str:
+def write_status(output_path: Path, products: dict, balance: int) -> str:
     with open(output_path, "w") as f:
         f.write(f"{balance}")
-        for product_status in products_status:
+        for product in products:
             pass
 
 
@@ -60,22 +60,22 @@ def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = []
-    products_status = {}
+    products = {}
     balance = 0
 
     for operation in operations:
         match operation[0]:
             case "O":
-                order(operation, products_status, balance)
+                order(operation, products, balance)
             case "R":
-                restock_product(operation, products_status)
+                restock_product(operation, products)
             case "P":
-                change_product_price(operation, products_status)
+                change_product_price(operation, products)
             case "M":
                 restock_money(operation, balance)
 
     # Finalmente escribimos en fichero de salida
-    write_status(status_path, products_status, balance)
+    write_status(status_path, products, balance)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
