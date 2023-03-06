@@ -6,8 +6,21 @@ from pathlib import Path
 
 
 # Hacer un pedido
-def order(operation: list, products: dict) -> tuple:
-    return
+def order(stock, money, code):
+    product_code = code[:3]
+    product_qty = int(code[3])
+    product_price = float(code[4:])
+
+    if product_code in stock and stock[product_code] >= product_qty:
+        total_price = product_price * product_qty
+        if money >= total_price:
+            change = money - total_price
+            stock[product_code] -= product_qty
+            return (True, change)
+        else:
+            return (False, 0)
+    else:
+        return (False, 0)
 
 
 # Reponer un producto
