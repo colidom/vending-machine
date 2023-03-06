@@ -46,7 +46,8 @@ def change_product_price(operation: list, new_price: int):
 def restock_money(operation: list, money: int):
     # Ejemplo de entrada
     operation = ["M", 20]
-    return
+    money += int(operation[1])
+    return money
 
 
 # Lee fichero de entrada
