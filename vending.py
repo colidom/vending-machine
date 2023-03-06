@@ -7,7 +7,9 @@ from pathlib import Path
 
 # Hacer un pedido
 def order(operation: list, products: dict, money: int) -> tuple:
-    print(operation)
+    # Ejemplo de entrada
+    operation = ["O", "D12", 7, 21]
+
     product_code = operation[1]
     product_qty = int(operation[2])
     product_price = int(operation[3])
@@ -28,16 +30,22 @@ def order(operation: list, products: dict, money: int) -> tuple:
 
 # Reponer un producto
 def restock_product(operation: list, money: int):
+    # Ejemplo de entrada
+    operation = ["R", "F19", 9]
     return
 
 
 # Cambiar el precio de un producto
 def change_product_price(operation: list, new_price: int):
+    # Ejemplo de entrada
+    operation = ["P", "F10", 3]
     return
 
 
 # Reponer dinero
 def restock_money(operation: list, money: int):
+    # Ejemplo de entrada
+    operation = ["M", 20]
     return
 
 
