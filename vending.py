@@ -46,10 +46,10 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def write_status(output_path: Path, products: dict, balance: int) -> str:
+def write_status(output_path: Path, sales: dict, balance: int) -> str:
     with open(output_path, "w") as f:
         f.write(f"{balance}")
-        for product in products:
+        for sale in sales:
             pass
 
 
@@ -73,22 +73,22 @@ def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = []
-    products = {}
+    sales = {}
     balance = 0
 
     for operation in operations:
         match operation[0]:
             case "O":
-                order(operation, products, balance)
+                order(operation, sales, balance)
             case "R":
-                restock_product(operation, products)
+                restock_product(operation, sales)
             case "P":
-                change_product_price(operation, products)
+                change_product_price(operation, sales)
             case "M":
                 restock_money(operation, balance)
 
     # Finalmente escribimos en fichero de salida
-    write_status(status_path, products, balance)
+    write_status(status_path, sales, balance)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
