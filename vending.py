@@ -27,7 +27,7 @@ def order(operation: list, products: dict, money: int) -> tuple:
 
 
 # Reponer un producto
-def restock_product(operation: list, qty_restocked: int):
+def restock_product(operation: list, money: int):
     return
 
 
@@ -37,7 +37,7 @@ def change_product_price(operation: list, new_price: int):
 
 
 # Reponer dinero
-def restock_money(operation: list, money_amount: int):
+def restock_money(operation: list, money: int):
     return
 
 
@@ -82,16 +82,16 @@ def run(operations_path: Path) -> bool:
     for operation in operations:
         match operation[0]:
             case "O":
-                order(operation, products, money)
+                money = order(operation, products, money)
             case "R":
                 restock_product(operation, money)
             case "P":
                 change_product_price(operation, money)
             case "M":
-                restock_money(operation, money)
+                money = restock_money(operation, money)
 
     # Finalmente escribimos en fichero de salida
-    write_status(status_path, money, money)
+    write_status(status_path, products, money)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
