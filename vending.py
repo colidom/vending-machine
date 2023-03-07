@@ -38,9 +38,7 @@ def change_product_price(operation: list, new_price: int):
 
 
 # Reponer dinero
-def restock_money(operation: list, money: int):
-    # Ejemplo de entrada
-    operation = ["M", 20]
+def restock_money(operation: list, money: int) -> int:
     money += int(operation[1])
     return money
 
