@@ -23,12 +23,6 @@ def order(operation: list, products: dict, money: int) -> tuple:
     return money
 
 
-"""         else:
-            return (False, 0)
-    else:
-        return (False, 0) """
-
-
 # Reponer un producto
 def restock_product(operation: list, money: int):
     # Ejemplo de entrada
