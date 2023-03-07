@@ -20,7 +20,7 @@ def order(operation: list, products: dict, money: int) -> tuple:
             change = money - total_price
             products[product_code] -= product_qty
     # Debe retornar 14 ya que es el total de la primera operación 7 unidades * 2€
-    return change
+    return money
 
 
 """         else:
