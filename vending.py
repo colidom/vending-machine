@@ -62,8 +62,6 @@ def read_operations(input_path: Path) -> list:
 def write_status(output_path: Path, products: dict, money: int) -> str:
     with open(output_path, "w") as f:
         f.write(f"{money}")
-        for sale in money:
-            pass
 
 
 # Función auxiliar para informar errores
