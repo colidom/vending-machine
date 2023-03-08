@@ -51,9 +51,11 @@ def read_operations(input_path: Path) -> list:
 
 
 # Escribe operaciones en fichero de salida
-def write_status(output_path: Path, products: dict, money: int) -> str:
-    with open(output_path, "w") as f:
-        f.write(f"{money}")
+def write_status_file(path: Path, products: dict, money: int):
+    with open(path, "w") as f:
+        f.write(f"{money}\n")
+        for code, details in sorted(products.items()):
+            f.write(f"{code} {details['stock']} {details['price']}\n")
 
 
 # Función auxiliar para informar errores
@@ -91,7 +93,7 @@ def run(operations_path: Path) -> bool:
                 money = restock_money(operation, money)
 
     # Finalmente escribimos en fichero de salida
-    write_status(status_path, products, money)
+    write_status_file(status_path, products, money)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
