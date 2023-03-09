@@ -58,21 +58,6 @@ def write_status_file(path: Path, products: dict, money: int):
             f.write(f"{code} {details['stock']} {details['price']}\n")
 
 
-# Función auxiliar para informar errores
-def set_error(error: str) -> dict:
-    match error:
-        case "E1":
-            error_desc = {"code": "E1", "desc": "PRODUCT NOT FOUND"}
-        case "E2":
-            error_desc = {"code": "E2", "desc": "UNAVAILABLE STOCK"}
-        case "E3":
-            error_desc = {"code": "E3", "desc": "NOT ENOUGH USER MONEY"}
-        case _:
-            error_desc = {"code": "E0", "desc": "UNKNOWN ERROR"}
-
-    return error_desc
-
-
 # Función rincipal
 def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
