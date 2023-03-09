@@ -30,18 +30,30 @@ def order(operation: list, products: dict, money: int) -> tuple:
     return money
 
 
-# Reponer un producto
-def restock_product(operation: list, money: int):
-    # Ejemplo de entrada
-    operation = ["R", "F19", 9]
-    return
+# Actualizar un producto existente
+def update_existing_product(operation: list, product: tuple, op_type: str) -> tuple:
+    if op_type == "R":
+        return  # algo
+    else:
+        return  # algo
 
 
-# Cambiar el precio de un producto
-def change_product_price(operation: list, new_price: int):
-    # Ejemplo de entrada
-    operation = ["P", "F10", 3]
-    return
+# Agregar un nuevo producto
+def create_product(operation: list, op_type: str) -> tuple:
+    if op_type == "R":
+        return  # algo
+    else:
+        return  # algo
+
+
+# Actualizar la información de un producto
+def update_product(operation: list, products: dict, op_type: str) -> dict:
+    prod_code = operation[1]
+    if prod_code in products:
+        update_existing_product()
+    elif op_type == "R":
+        create_product()
+    return products
 
 
 # Reponer dinero
@@ -67,13 +79,14 @@ def run(operations_path: Path) -> bool:
     money = 0
 
     for operation in operations:
+        op_type = operation[0]
         match operation[0]:
             case "O":
                 money = order(operation, products, money)
             case "R":
-                restock_product(operation, money)
+                update_product(operation, money, op_type)
             case "P":
-                change_product_price(operation, money)
+                update_product(operation, money, op_type)
             case "M":
                 money = restock_money(operation, money)
 
