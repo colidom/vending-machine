@@ -5,6 +5,13 @@ import filecmp
 from pathlib import Path
 
 
+# Leer el archivo de operaciones
+def read_operations(input_path: Path) -> list:
+    with open(input_path, "r") as f:
+        operations = [tuple(line.strip().split()) for line in f]
+        return operations
+
+
 # Hacer un pedido
 def order(operation: list, products: dict, money: int) -> tuple:
     # Ejemplo de entrada
@@ -41,13 +48,6 @@ def change_product_price(operation: list, new_price: int):
 def restock_money(operation: list, money: int) -> int:
     money += int(operation[1])
     return money
-
-
-# Leer el archivo de operaciones
-def read_operations(input_path: Path) -> list:
-    with open(input_path, "r") as f:
-        operations = [tuple(line.strip().split()) for line in f]
-        return operations
 
 
 # Escribe operaciones en fichero de salida
