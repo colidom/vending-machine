@@ -43,10 +43,10 @@ def restock_money(operation: list, money: int) -> int:
     return money
 
 
-# Lee fichero de entrada
+# Leer el archivo de operaciones
 def read_operations(input_path: Path) -> list:
     with open(input_path, "r") as f:
-        operations = [line.strip().split() for line in f]
+        operations = [tuple(line.strip().split()) for line in f]
         return operations
 
 
