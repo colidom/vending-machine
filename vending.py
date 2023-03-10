@@ -64,12 +64,16 @@ def restock_money(operation: list, money: int) -> int:
     return money
 
 
-# Escribe operaciones en fichero de salida
-def write_status_file(path: Path, products: dict, money: int):
-    with open(path, "w") as f:
+# Escribir el archivo de estado
+def write_status_file(file_path: Path, products: dict, money: int):
+    with open(file_path, "w") as f:
         f.write(f"{money}\n")
-        for code, details in sorted(products.items()):
-            f.write(f"{code} {details['stock']} {details['price']}\n")
+
+        prod_codes = sorted(products.keys())
+        for prod_code in prod_codes:
+            stock, price = products[prod_code]
+            f.write(f"{prod_code} {stock} {price}\n")
+
 
 
 # Función rincipal
