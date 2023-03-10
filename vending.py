@@ -13,7 +13,7 @@ def read_operations(input_path: Path) -> list:
 
 
 # Hacer un pedido
-def order(operation: list, products: dict, money: int) -> int:
+def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     # Ejemplo de entrada
     operation = ["O", "D12", 7, 21]
 
@@ -31,7 +31,7 @@ def order(operation: list, products: dict, money: int) -> int:
 
 
 # Actualizar un producto existente
-def modify_product(operation: list, product: tuple, op_type: str) -> tuple:
+def modify_product(operation: list[str | int], product: tuple, op_type: str) -> tuple[int]:
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (product[0] + restocked_qty, product[1])
@@ -40,7 +40,7 @@ def modify_product(operation: list, product: tuple, op_type: str) -> tuple:
 
 
 # Agregar un nuevo producto
-def create_product(operation: list, op_type: str) -> tuple:
+def create_product(operation: tuple[str], op_type: str) -> tuple:
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (restocked_qty, 0)
@@ -49,7 +49,7 @@ def create_product(operation: list, op_type: str) -> tuple:
 
 
 # Actualizar la información de un producto
-def update_product(operation: list, products: dict, op_type: str) -> dict:
+def update_product(operation: tuple[str], products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
     prod_code = operation[1]
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
@@ -59,7 +59,7 @@ def update_product(operation: list, products: dict, op_type: str) -> dict:
 
 
 # Reponer dinero
-def restock_money(operation: list, money: int) -> int:
+def restock_money(operation: list[str], money: int) -> int:
     money += int(operation[1])
     return money
 
