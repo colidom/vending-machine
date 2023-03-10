@@ -83,9 +83,7 @@ def run(operations_path: Path) -> bool:
         match operation[0]:
             case "O":
                 money = order(operation, products, money)
-            case "R":
-                update_product(operation, money, op_type)
-            case "P":
+            case "R" | "P":
                 update_product(operation, money, op_type)
             case "M":
                 money = restock_money(operation, money)
