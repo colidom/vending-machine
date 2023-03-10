@@ -40,10 +40,11 @@ def update_existing_product(operation: list, product: tuple, op_type: str) -> tu
 
 # Agregar un nuevo producto
 def create_product(operation: list, op_type: str) -> tuple:
+    restocked_qty = int(operation[2])
     if op_type == "R":
-        return  # algo
+        return (restocked_qty, 0)
     else:
-        return  # algo
+        return (0, restocked_qty)
 
 
 # Actualizar la información de un producto
