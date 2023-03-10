@@ -13,7 +13,7 @@ def read_operations(input_path: Path) -> list:
 
 
 # Hacer un pedido
-def order(operation: list, products: dict, money: int) -> tuple:
+def order(operation: list, products: dict, money: int) -> int:
     # Ejemplo de entrada
     operation = ["O", "D12", 7, 21]
 
