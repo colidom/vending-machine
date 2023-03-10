@@ -75,8 +75,7 @@ def write_status_file(file_path: Path, products: dict, money: int):
             f.write(f"{prod_code} {stock} {price}\n")
 
 
-
-# Función rincipal
+# Función Principal
 def run(operations_path: Path) -> bool:
     status_path = "data/vending/status.dat"
 
@@ -90,7 +89,7 @@ def run(operations_path: Path) -> bool:
             case "O":
                 money = order(operation, products, money)
             case "R" | "P":
-                update_product(operation, money, op_type)
+                update_product(operation, products, op_type)
             case "M":
                 money = restock_money(operation, money)
 
