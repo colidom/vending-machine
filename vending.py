@@ -32,10 +32,11 @@ def order(operation: list, products: dict, money: int) -> tuple:
 
 # Actualizar un producto existente
 def update_existing_product(operation: list, product: tuple, op_type: str) -> tuple:
+    restocked_qty = int(operation[2])
     if op_type == "R":
-        return  # algo
+        return (product[0] + restocked_qty, product[1])
     else:
-        return  # algo
+        return (product[0], restocked_qty)
 
 
 # Agregar un nuevo producto
