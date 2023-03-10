@@ -86,7 +86,7 @@ def run(operations_path: Path) -> bool:
 
     for operation in operations:
         op_type = operation[0]
-        match operation[0]:
+        match op_type:
             case "O":
                 money = order(operation, products, money)
             case "R" | "P":
