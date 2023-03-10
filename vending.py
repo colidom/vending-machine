@@ -50,9 +50,9 @@ def create_product(operation: list, op_type: str) -> tuple:
 def update_product(operation: list, products: dict, op_type: str) -> dict:
     prod_code = operation[1]
     if prod_code in products:
-        update_existing_product()
+        products[prod_code] = update_existing_product(operation, products[prod_code], op_type)
     elif op_type == "R":
-        create_product()
+        products[prod_code] = create_product(operation, op_type)
     return products
 
 
