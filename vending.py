@@ -84,9 +84,7 @@ def write_status_file(file_path: Path, products: dict, money: int):
 
 
 # Función Principal
-def run(operations_path: Path) -> bool:
-    status_path = "data/vending/status.dat"
-
+def run(operations_path: Path, status_path: Path, expected_path: Path) -> bool:
     operations = read_operations(operations_path)
     products = {}
     money = 0
@@ -104,8 +102,11 @@ def run(operations_path: Path) -> bool:
     # Finalmente escribimos en fichero de salida
     write_status_file(status_path, products, money)
 
-    return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
+    return filecmp.cmp(status_path, expected_path, shallow=False)
 
 
 if __name__ == "__main__":
-    print(run("data/vending/operations.dat"))
+    status_path = "data/vending/status.dat"
+    operations_path = "data/vending/operations.dat"
+    expected_path = "data/vending/.expected"
+    print(run(operations_path, status_path, expected_path))
