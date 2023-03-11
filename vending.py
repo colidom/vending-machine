@@ -40,7 +40,7 @@ def modify_product(operation: list[str | int], product: tuple, op_type: str) -> 
 
 
 # Agregar un nuevo producto
-def create_product(operation: tuple[str], op_type: str) -> tuple:
+def create_product(operation: tuple[str], op_type: str) -> tuple[int]:
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (restocked_qty, 0)
