@@ -21,6 +21,14 @@ def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     product_qty = int(operation[2])
     product_price = int(operation[3])
 
+    # Comprobar si prod_code no está en diccionario de products retornar money
+    # Desempaquetado de dict products(entrada) concretamente sobre el producto que estamos iterando en este momento (prod_code)
+    # Comprobar si el precio * cantidad orneada es mayor que el dinero insertado o el stock es menor que la cantidad ordenada, retornar money
+    # Obtener el cambio, producto de la operación dinero insertado - precio  multiplicado por cantidad ordenada(ordered_qty)
+    # Sumar a money el dinero insertado - el cambio
+    # Actualizar los productos pero recuerda, con el ((stock - la cantidad ordenada), el precio) recuerda siempre actuando sobre el índice que corresponde en cada iteración products[prod_code]
+    # Finalmente retornamos money donde ya habremos sumado el resultado de la operación
+
     if product_code in products and products[product_code] >= product_qty:
         total_price = product_price * product_qty
         if money >= total_price:
