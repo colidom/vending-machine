@@ -29,13 +29,13 @@ def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     stock = int(stock)
 
     # Comprobar si el stock es suficiente para la cantidad ordenada y si el dinero es suficiente para pagar la compra
-    if ordered_qty > stock or ordered_qty * int(inserted_money) > money:
+    if ordered_qty > stock or ordered_qty * price > int(inserted_money):
         return money
 
     # Calcular el cambio
-    change = money - ordered_qty * int(inserted_money)
-    spare_money = int(inserted_money) - change
-    money += spare_money
+    change = int(inserted_money) - price * ordered_qty 
+
+    money += int(inserted_money) - change
 
     # Actualizar el stock del producto en el diccionario products
     products[product_code] = (stock - ordered_qty, price)
