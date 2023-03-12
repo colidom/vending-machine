@@ -15,7 +15,7 @@ def read_operations(input_path: Path) -> list:
 #Hacer un pedido
 def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     # Desempaquetar elementos de la tupla operation
-    op_type, product_code, ordered_qty, product_price = operation
+    op_type, product_code, ordered_qty, inserted_money = operation
 
     # Comprobar si el producto está disponible en el diccionario products
     if product_code not in products:
@@ -29,17 +29,19 @@ def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     stock = int(stock)
 
     # Comprobar si el stock es suficiente para la cantidad ordenada y si el dinero es suficiente para pagar la compra
-    if ordered_qty > stock or ordered_qty * int(product_price) > money:
+    if ordered_qty > stock or ordered_qty * int(inserted_money) > money:
         return money
 
     # Calcular el cambio
-    change = money - ordered_qty * int(product_price)
+    change = money - ordered_qty * int(inserted_money)
+    spare_money = int(inserted_money) - change
+    money += spare_money
 
     # Actualizar el stock del producto en el diccionario products
     products[product_code] = (stock - ordered_qty, price)
 
     # Retornar el dinero restante después de la compra
-    return money - change
+    return money 
 
 
 
