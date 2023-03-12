@@ -95,4 +95,4 @@ if __name__ == "__main__":
     status_path = "data/vending/status.dat"
     operations_path = "data/vending/operations.dat"
     expected_path = "data/vending/.expected"
-    print(run(operations_path, status_path, expected_path))
+    run(operations_path, status_path, expected_path)
