@@ -46,8 +46,7 @@ def create_product(operation: tuple[str], op_type: str) -> tuple[int]:
     return (0, restocked_qty)
 
 
-def update_product(
-    operation: tuple[str], products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
+def update_product(operation: tuple[str], products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
     prod_code = operation[1]
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
