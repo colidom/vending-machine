@@ -14,28 +14,29 @@ def read_operations(input_path: Path) -> list:
 
 # Hacer un pedido
 def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
-    # Ejemplo de entrada
-    operation = ["O", "D12", 7, 21]
+    # Desempaquetar elementos de la tupla operation
+    op_type, product_code, ordered_qty, product_price = operation
 
-    product_code = operation[1]
-    product_qty = int(operation[2])
-    product_price = int(operation[3])
+    # Comprobar si el producto está disponible en el diccionario products
+    if product_code not in products:
+        return money
 
-    # Comprobar si prod_code no está en diccionario de products retornar money
-    # Desempaquetado de dict products(entrada) concretamente sobre el producto que estamos iterando en este momento (prod_code)
-    # Comprobar si el precio * cantidad orneada es mayor que el dinero insertado o el stock es menor que la cantidad ordenada, retornar money
-    # Obtener el cambio, producto de la operación dinero insertado - precio  multiplicado por cantidad ordenada(ordered_qty)
-    # Sumar a money el dinero insertado - el cambio
-    # Actualizar los productos pero recuerda, con el ((stock - la cantidad ordenada), el precio) recuerda siempre actuando sobre el índice que corresponde en cada iteración products[prod_code]
-    # Finalmente retornamos money donde ya habremos sumado el resultado de la operación
+    # Obtener la información de stock y precio del producto
+    stock, price = products[product_code]
 
-    if product_code in products and products[product_code] >= product_qty:
-        total_price = product_price * product_qty
-        if money >= total_price:
-            change = money - total_price
-            products[product_code] -= product_qty
-    # Debe retornar 14 ya que es el total de la primera operación 7 unidades * 2€
-    return money
+    # Comprobar si el stock es suficiente para la cantidad ordenada y si el dinero es suficiente para pagar la compra
+    if ordered_qty > stock or ordered_qty * product_price > money:
+        return money
+
+    # Calcular el cambio
+    change = money - ordered_qty * product_price
+
+    # Actualizar el stock del producto en el diccionario products
+    products[product_code] = (stock - ordered_qty, price)
+
+    # Retornar el dinero restante después de la compra
+    return money - change
+
 
 
 # Actualizar un producto existente
