@@ -1,5 +1,5 @@
 # ******************
-# MÁQUINA DE VENDING
+# MAQUINA DE VENDING
 # ******************
 import filecmp
 from pathlib import Path
@@ -11,39 +11,28 @@ def read_operations(input_path: Path) -> list:
         operations = [tuple(line.strip().split()) for line in f]
         return operations
 
-
 #Hacer un pedido
 def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
-    # Desempaquetar elementos de la tupla operation
-    op_type, product_code, ordered_qty, inserted_money = operation
+    product_code = operation[1] 
+    ordered_qty = int(operation[2])
+    inserted_money = int(operation[3])
 
-    # Comprobar si el producto está disponible en el diccionario products
     if product_code not in products:
         return money
-
-    # Obtener la información de stock y precio del producto
+ 
     stock, price = products[product_code]
 
-    # Convertir la cantidad ordenada y el valor del stock a números enteros
     ordered_qty = int(ordered_qty)
     stock = int(stock)
 
-    # Comprobar si el stock es suficiente para la cantidad ordenada y si el dinero es suficiente para pagar la compra
     if ordered_qty > stock or ordered_qty * price > int(inserted_money):
         return money
 
-    # Calcular el cambio
     change = int(inserted_money) - price * ordered_qty 
-
-    money += int(inserted_money) - change
-
-    # Actualizar el stock del producto en el diccionario products
+    money += int(inserted_money) - change 
     products[product_code] = (stock - ordered_qty, price)
 
-    # Retornar el dinero restante después de la compra
     return money 
-
-
 
 
 # Actualizar un producto existente
