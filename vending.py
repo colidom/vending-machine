@@ -12,7 +12,7 @@ def read_operations(input_path: Path) -> list:
         return operations
 
 
-# Hacer un pedido
+#Hacer un pedido
 def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     # Desempaquetar elementos de la tupla operation
     op_type, product_code, ordered_qty, product_price = operation
