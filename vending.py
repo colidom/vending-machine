@@ -31,8 +31,7 @@ def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
     return money
 
 
-def modify_product(
-    operation: list[str | int], product: tuple, op_type: str) -> tuple[int]:
+def modify_product(operation: tuple[str], product: tuple, op_type: str) -> tuple[int]:
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (product[0] + restocked_qty, product[1])
@@ -55,7 +54,7 @@ def update_product(operation: tuple[str], products: dict[str, tuple], op_type: s
     return products
 
 
-def restock_money(operation: list[str], money: int) -> int:
+def restock_money(operation: tuple[str], money: int) -> int:
     money += int(operation[1])
     return money
 
