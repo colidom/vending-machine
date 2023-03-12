@@ -22,10 +22,7 @@ def order(operation: tuple[str], products: dict[str, tuple], money: int) -> int:
  
     stock, price = products[product_code]
 
-    ordered_qty = int(ordered_qty)
-    stock = int(stock)
-
-    if ordered_qty > stock or ordered_qty * price > int(inserted_money):
+    if ordered_qty > stock or ordered_qty * price > inserted_money:
         return money
 
     change = int(inserted_money) - price * ordered_qty 
