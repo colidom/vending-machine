@@ -5,7 +5,7 @@ import filecmp
 from pathlib import Path
 
 
-def read_operations(input_path: Path) -> list:
+def read_operations(input_path: str) -> list:
     with open(input_path, "r") as f:
         operations = [tuple(line.strip().split()) for line in f]
         return operations
@@ -45,7 +45,9 @@ def create_product(operation: tuple[str], op_type: str) -> tuple[int]:
     return (0, restocked_qty)
 
 
-def update_product(operation: tuple[str], products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
+def update_product(
+    operation: tuple[str], products: dict[str, tuple], op_type: str
+) -> dict[str, tuple]:
     prod_code = operation[1]
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
@@ -59,7 +61,7 @@ def restock_money(operation: tuple[str], money: int) -> int:
     return money
 
 
-def write_status_file(file_path: Path, products: dict, money: int):
+def write_status_file(file_path: str, products: dict, money: int):
     with open(file_path, "w") as f:
         f.write(f"{money}\n")
 
@@ -69,7 +71,7 @@ def write_status_file(file_path: Path, products: dict, money: int):
             f.write(f"{prod_code} {stock} {price}\n")
 
 
-def run(operations_path: Path) -> bool:
+def run(operations_path: str) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = read_operations(operations_path)
