@@ -5,7 +5,7 @@ import filecmp
 from pathlib import Path
 
 
-def read_operations(input_path: str) -> list:
+def read_operations(input_path: str) -> list[tuple]:
     with open(input_path, "r") as f:
         operations = [tuple(line.strip().split()) for line in f]
         return operations
@@ -35,14 +35,14 @@ def modify_product(operation: tuple[str], product: tuple, op_type: str) -> tuple
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (product[0] + restocked_qty, product[1])
-    return (product[0], restocked_qty)
+    return product[0], restocked_qty
 
 
 def create_product(operation: tuple[str], op_type: str) -> tuple[int]:
     restocked_qty = int(operation[2])
     if op_type == "R":
-        return (restocked_qty, 0)
-    return (0, restocked_qty)
+        return restocked_qty, 0
+    return 0, restocked_qty
 
 
 def update_product(
