@@ -43,7 +43,9 @@ def create_product(operation: tuple) -> tuple[int, int]:
     return restocked_qty, 0
 
 
-def update_product(operation: tuple, products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
+def update_product(
+    operation: tuple, products: dict[str, tuple], op_type: str
+) -> dict[str, tuple]:
     prod_code = operation[1]
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
@@ -83,6 +85,9 @@ def run(operations_path: str) -> bool:
                 update_product(operation, products, op_type)
             case "M":
                 money = restock_money(operation, money)
+            case _:
+                print(f"Operación {op_type} desconocida")
+                continue
 
     write_status_file(status_path, products, money)
 
