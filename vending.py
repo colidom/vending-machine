@@ -71,7 +71,7 @@ def run(operations_path: str) -> bool:
     status_path = "data/vending/status.dat"
 
     operations = read_operations(operations_path)
-    products = {}
+    products: dict = {}
     money = 0
 
     for operation in operations:
