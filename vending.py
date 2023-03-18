@@ -38,7 +38,7 @@ def modify_product(operation: tuple, product: tuple, op_type: str) -> tuple[int,
     return (product[0], restocked_qty)
 
 
-def create_product(operation: tuple, op_type: str) -> tuple[int, int]:
+def create_product(operation: tuple) -> tuple[int, int]:
     restocked_qty = int(operation[2])
     return restocked_qty, 0
 
@@ -48,7 +48,7 @@ def update_product(operation: tuple, products: dict[str, tuple], op_type: str) -
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
     elif op_type == "R":
-        products[prod_code] = create_product(operation, op_type)
+        products[prod_code] = create_product(operation)
     return products
 
 
