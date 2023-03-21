@@ -7,11 +7,11 @@ from pathlib import Path
 
 def read_operations(input_path: str) -> list:
     with open(input_path, "r") as f:
-        operations = [tuple(line.strip().split()) for line in f]
+        operations = [line.strip().split() for line in f]
         return operations
 
 
-def order(operation: tuple, products: dict[str, tuple], money: int) -> int:
+def order(operation: list, products: dict[str, tuple], money: int) -> int:
     product_code = operation[1]
     ordered_qty = int(operation[2])
     inserted_money = int(operation[3])
@@ -31,19 +31,19 @@ def order(operation: tuple, products: dict[str, tuple], money: int) -> int:
     return money
 
 
-def modify_product(operation: tuple, product: tuple, op_type: str) -> tuple[int, int]:
+def modify_product(operation: list, product: tuple, op_type: str) -> tuple[int, int]:
     restocked_qty = int(operation[2])
     if op_type == "R":
         return (product[0] + restocked_qty, product[1])
     return (product[0], restocked_qty)
 
 
-def create_product(operation: tuple) -> tuple[int, int]:
+def create_product(operation: list) -> tuple[int, int]:
     restocked_qty = int(operation[2])
     return restocked_qty, 0
 
 
-def update_product(operation: tuple, products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
+def update_product(operation: list, products: dict[str, tuple], op_type: str) -> dict[str, tuple]:
     prod_code = operation[1]
     if prod_code in products:
         products[prod_code] = modify_product(operation, products[prod_code], op_type)
@@ -52,7 +52,7 @@ def update_product(operation: tuple, products: dict[str, tuple], op_type: str) -
     return products
 
 
-def restock_money(operation: tuple, money: int) -> int:
+def restock_money(operation: list, money: int) -> int:
     money += int(operation[1])
     return money
 
