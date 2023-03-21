@@ -23,8 +23,8 @@ def manage_order(operation: list, products: dict[str, tuple], vending_money: int
     if ordered_qty > stock or ordered_qty * price > inserted_money:
         return vending_money
 
-    change = int(inserted_money) - price * ordered_qty
-    vending_money += int(inserted_money) - change
+    change = inserted_money - price * ordered_qty
+    vending_money += inserted_money - change
     products[product_code] = (stock - ordered_qty, price)
 
     return vending_money
