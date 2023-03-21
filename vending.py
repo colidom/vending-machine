@@ -17,17 +17,17 @@ def manage_order(operation: list, products: dict[str, tuple], vending_money: int
 
     if product_code not in products:
         return vending_money
+    else:
+        stock, price = products[product_code]
 
-    stock, price = products[product_code]
+        if ordered_qty > stock or ordered_qty * price > inserted_money:
+            return vending_money
 
-    if ordered_qty > stock or ordered_qty * price > inserted_money:
+        change = inserted_money - price * ordered_qty
+        vending_money += inserted_money - change
+        products[product_code] = (stock - ordered_qty, price)
+
         return vending_money
-
-    change = inserted_money - price * ordered_qty
-    vending_money += inserted_money - change
-    products[product_code] = (stock - ordered_qty, price)
-
-    return vending_money
 
 
 def modify_product(operation: list, product: tuple, op_type: str) -> tuple[int, int]:
