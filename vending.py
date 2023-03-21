@@ -10,7 +10,7 @@ def read_operations(input_path: str) -> list:
         return [line.strip().split() for line in f]
 
 
-def order(operation: list, products: dict[str, tuple], money: int) -> int:
+def manage_order(operation: list, products: dict[str, tuple], money: int) -> int:
     product_code = operation[1]
     ordered_qty = int(operation[2])
     inserted_money = int(operation[3])
@@ -77,7 +77,7 @@ def run(operations_path: str) -> bool:
         op_type = operation[0]
         match op_type:
             case "O":
-                money = order(operation, products, money)
+                money = manage_order(operation, products, money)
             case "R" | "P":
                 update_product(operation, products, op_type)
             case "M":
