@@ -7,8 +7,7 @@ from pathlib import Path
 
 def read_operations(input_path: str) -> list:
     with open(input_path, "r") as f:
-        operations = [line.strip().split() for line in f]
-        return operations
+        return [line.strip().split() for line in f]
 
 
 def order(operation: list, products: dict[str, tuple], money: int) -> int:
