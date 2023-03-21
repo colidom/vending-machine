@@ -10,24 +10,24 @@ def read_operations(input_path: str) -> list:
         return [line.strip().split() for line in f]
 
 
-def manage_order(operation: list, products: dict[str, tuple], money: int) -> int:
+def manage_order(operation: list, products: dict[str, tuple], vending_money: int) -> int:
     product_code = operation[1]
     ordered_qty = int(operation[2])
     inserted_money = int(operation[3])
 
     if product_code not in products:
-        return money
+        return vending_money
 
     stock, price = products[product_code]
 
     if ordered_qty > stock or ordered_qty * price > inserted_money:
-        return money
+        return vending_money
 
     change = int(inserted_money) - price * ordered_qty
-    money += int(inserted_money) - change
+    vending_money += int(inserted_money) - change
     products[product_code] = (stock - ordered_qty, price)
 
-    return money
+    return vending_money
 
 
 def modify_product(operation: list, product: tuple, op_type: str) -> tuple[int, int]:
@@ -56,9 +56,9 @@ def restock_money(operation: list, money: int) -> int:
     return money
 
 
-def write_status_file(file_path: str, products: dict, money: int):
+def write_status_file(file_path: str, products: dict, vending_money: int):
     with open(file_path, "w") as f:
-        f.write(f"{money}\n")
+        f.write(f"{vending_money}\n")
 
         prod_codes = sorted(products.keys())
         for prod_code in prod_codes:
@@ -71,22 +71,22 @@ def run(operations_path: str) -> bool:
 
     operations = read_operations(operations_path)
     products: dict = {}
-    money = 0
+    vending_money = 0
 
     for operation in operations:
         op_type = operation[0]
         match op_type:
             case "O":
-                money = manage_order(operation, products, money)
+                vending_money = manage_order(operation, products, vending_money)
             case "R" | "P":
                 update_product(operation, products, op_type)
             case "M":
-                money = restock_money(operation, money)
+                vending_money = restock_money(operation, vending_money)
             case _:
                 print(f"Operación {op_type} desconocida")
                 continue
 
-    write_status_file(status_path, products, money)
+    write_status_file(status_path, products, vending_money)
 
     return filecmp.cmp(status_path, "data/vending/.expected", shallow=False)
 
